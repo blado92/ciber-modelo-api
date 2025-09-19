@@ -1,0 +1,29 @@
+﻿using DataManager;
+using DBManager;
+using Microsoft.EntityFrameworkCore;
+using ModelManager;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessManager
+{
+    public class UserBM
+    {
+
+        private readonly UserDM userDM;
+
+        public UserBM(ApplicationDbContext context)
+        {
+            userDM = new UserDM(context);
+        }
+
+        public async Task<UserModel?> GetUserByEmailPasswordAsync(string email, string password)
+        {
+            return await userDM.GetUserByEmailPasswordAsync(email, password);
+        }
+
+    }
+}
