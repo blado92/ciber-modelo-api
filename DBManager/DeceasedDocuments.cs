@@ -2,14 +2,13 @@
 
 namespace DBManager
 {
-    [Table("tblUser")]
-    public class User
+    [Table("tblDeceasedDocuments")]
+    public class DeceasedDocuments
     {
         public int Id { get; set; }
+        public int DeceasedId { get; set; }
         public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Url { get; set; }
         public DateTime Created { get; set; }
     }
 }

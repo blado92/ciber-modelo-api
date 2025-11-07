@@ -4,3 +4,13 @@ GET {{CiberModelo_WebServices_HostAddress}}/login
 Accept: application/json
 
 ###
+
+GET {{CiberModelo_WebServices_HostAddress}}/deceased
+Accept: application/json
+
+###
+
+GET {{CiberModelo_WebServices_HostAddress}}/deceased/documents
+Accept: application/json
+
+###
