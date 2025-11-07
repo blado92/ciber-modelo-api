@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251107021903_InitialCreate")]
+    [Migration("20251107195252_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,22 @@ namespace DBManager.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DBManager.AccessMatrix", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QueryTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccessLevelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "QueryTypeId", "AccessLevelId");
+
+                    b.ToTable("tblAccessMatrix");
+                });
 
             modelBuilder.Entity("DBManager.Deceased", b =>
                 {
@@ -70,16 +86,13 @@ namespace DBManager.Migrations
             modelBuilder.Entity("DBManager.DeceasedDocuments", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("DeceasedId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -89,9 +102,25 @@ namespace DBManager.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "DeceasedId");
 
                     b.ToTable("tblDeceasedDocuments");
+                });
+
+            modelBuilder.Entity("DBManager.FieldAccessLevel", b =>
+                {
+                    b.Property<int>("QueryTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccessLevelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FieldId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QueryTypeId", "AccessLevelId", "FieldId");
+
+                    b.ToTable("tblFieldAccessLevel");
                 });
 
             modelBuilder.Entity("DBManager.User", b =>
@@ -124,6 +153,22 @@ namespace DBManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tblUser");
+                });
+
+            modelBuilder.Entity("DBManager.UserDeceasedRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DeceasedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "DeceasedId", "RoleId");
+
+                    b.ToTable("tblUserDeceasedRole");
                 });
 
             modelBuilder.Entity("DBManager.ValidationState", b =>
