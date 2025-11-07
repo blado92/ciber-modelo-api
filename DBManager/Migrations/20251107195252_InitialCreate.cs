@@ -12,6 +12,19 @@ namespace DBManager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "tblAccessMatrix",
+                columns: table => new
+                {
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    QueryTypeId = table.Column<int>(type: "int", nullable: false),
+                    AccessLevelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblAccessMatrix", x => new { x.RoleId, x.QueryTypeId, x.AccessLevelId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tblDeceased",
                 columns: table => new
                 {
@@ -35,8 +48,7 @@ namespace DBManager.Migrations
                 name: "tblDeceasedDocuments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     DeceasedId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -44,7 +56,20 @@ namespace DBManager.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tblDeceasedDocuments", x => x.Id);
+                    table.PrimaryKey("PK_tblDeceasedDocuments", x => new { x.Id, x.DeceasedId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblFieldAccessLevel",
+                columns: table => new
+                {
+                    QueryTypeId = table.Column<int>(type: "int", nullable: false),
+                    AccessLevelId = table.Column<int>(type: "int", nullable: false),
+                    FieldId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblFieldAccessLevel", x => new { x.QueryTypeId, x.AccessLevelId, x.FieldId });
                 });
 
             migrationBuilder.CreateTable(
@@ -62,6 +87,19 @@ namespace DBManager.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tblUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblUserDeceasedRole",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DeceasedId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblUserDeceasedRole", x => new { x.UserId, x.DeceasedId, x.RoleId });
                 });
 
             migrationBuilder.CreateTable(
@@ -84,13 +122,22 @@ namespace DBManager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "tblAccessMatrix");
+
+            migrationBuilder.DropTable(
                 name: "tblDeceased");
 
             migrationBuilder.DropTable(
                 name: "tblDeceasedDocuments");
 
             migrationBuilder.DropTable(
+                name: "tblFieldAccessLevel");
+
+            migrationBuilder.DropTable(
                 name: "tblUser");
+
+            migrationBuilder.DropTable(
+                name: "tblUserDeceasedRole");
 
             migrationBuilder.DropTable(
                 name: "tblValidationState");

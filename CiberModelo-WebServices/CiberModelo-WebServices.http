@@ -14,3 +14,8 @@ GET {{CiberModelo_WebServices_HostAddress}}/deceased/documents
 Accept: application/json
 
 ###
+
+ {{CiberModelo_WebServices_HostAddress}}/deceased/querytypes
+Accept: application/json
+
+###
