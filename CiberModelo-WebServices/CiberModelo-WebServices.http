@@ -19,3 +19,8 @@ Accept: application/json
 Accept: application/json
 
 ###
+
+ {{CiberModelo_WebServices_HostAddress}}/fields
+Accept: application/json
+
+###

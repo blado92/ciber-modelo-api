@@ -1,6 +1,7 @@
 using BusinessManager;
 using CiberModelo_WebServices.Deceased;
 using CiberModelo_WebServices.DeceasedDocuments;
+using CiberModelo_WebServices.Field;
 using CiberModelo_WebServices.QueryType;
 using CiberModelo_WebServices.User;
 using DBManager;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<UserBM>();
 builder.Services.AddScoped<DeceasedBM>();
 builder.Services.AddScoped<DeceasedDocumentsBM>();
 builder.Services.AddScoped<QueryTypeBM>();
+builder.Services.AddScoped<FieldBM>();
 
 builder.Services.AddControllers();
 
@@ -31,6 +33,7 @@ app.MapLoginEndpoints();
 app.MapDeceasedEndpoints();
 app.MapDeceasedDocumentsEndpoints();
 app.MapQueryTypeEndPoints();
+app.MapFieldEndpoints();
 
 app.Run();
 
@@ -42,6 +45,8 @@ app.Run();
 [JsonSerializable(typeof(List<DeceasedDocumentsModel>))]
 [JsonSerializable(typeof(QueryTypeModel[]))]
 [JsonSerializable(typeof(List<QueryTypeModel>))]
+[JsonSerializable(typeof(FieldModel[]))]
+[JsonSerializable(typeof(List<FieldModel>))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 
