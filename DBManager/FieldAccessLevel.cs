@@ -7,6 +7,6 @@ namespace DBManager
     {
         public int QueryTypeId { get; set; }
         public int AccessLevelId { get; set; }
-        public int FieldId { get; set; }
+        public string FieldId { get; set; }
     }
 }
