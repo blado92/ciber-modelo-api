@@ -20,6 +20,7 @@ namespace DataManager
                 join r in _context.Role on udr.RoleId equals r.Id
                 join am in _context.AccessMatrix on r.Id equals am.RoleId
                 join qt in _context.QueryType on am.QueryTypeId equals qt.Id
+                join al in _context.AccessLevel on am.AccessLevelId equals al.Id
                 where udr.UserId == userId && udr.DeceasedId == deceasedId
                 select new QueryTypeModel
                 {
@@ -30,6 +31,11 @@ namespace DataManager
                         Id = r.Id,
                         Name = r.Name,
                         Description = r.Description
+                    },
+                    AccessLevel = new AccessLevelModel
+                    {
+                        Id = al.Id,
+                        Name = al.Name
                     }
                 }
             ).ToListAsync();
