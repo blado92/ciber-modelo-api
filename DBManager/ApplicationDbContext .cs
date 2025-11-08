@@ -11,6 +11,7 @@ namespace DBManager
         {
         }
 
+        #if DEBUG
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -18,6 +19,7 @@ namespace DBManager
                 optionsBuilder.UseSqlServer("Server=localhost;Database=db_CiberModelo;Trusted_Connection=True;TrustServerCertificate=True;");
             }
         }
+        #endif
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
