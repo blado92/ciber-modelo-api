@@ -29,7 +29,16 @@ namespace DataManager
                     EPS = d.EPS,
                     Birthday = d.Birthday,
                     DeceasedDate = d.DeceasedDate,
-                    Created = d.Created
+                    Created = d.Created,
+                    BankingInstitution = d.BankingInstitution,
+                    Nationality = d.Nationality,
+                    Gender = d.Gender,
+                    RetirementFund = d.RetirementFund,
+                    Arl = d.Arl,
+                    SeveranceFund = d.SeveranceFund,
+                    IdentityDocument = d.IdentityDocument,
+                    IdentityDocumentType = d.IdentityDocumentType,
+                    MaritalStatus = d.MaritalStatus
                 }
             ).ToListAsync();
 
