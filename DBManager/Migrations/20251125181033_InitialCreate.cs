@@ -12,6 +12,19 @@ namespace DBManager.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "tblAccessLevel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblAccessLevel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tblAccessMatrix",
                 columns: table => new
                 {
@@ -37,7 +50,16 @@ namespace DBManager.Migrations
                     EPS = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeceasedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BankingInstitution = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaritalStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RetirementFund = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Arl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeveranceFund = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityDocument = table.Column<int>(type: "int", nullable: false),
+                    IdentityDocumentType = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,11 +87,50 @@ namespace DBManager.Migrations
                 {
                     QueryTypeId = table.Column<int>(type: "int", nullable: false),
                     AccessLevelId = table.Column<int>(type: "int", nullable: false),
-                    FieldId = table.Column<int>(type: "int", nullable: false)
+                    FieldId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tblFieldAccessLevel", x => new { x.QueryTypeId, x.AccessLevelId, x.FieldId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblFields",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblFields", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblQueryType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblQueryType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tblRole",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblRole", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,6 +183,9 @@ namespace DBManager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "tblAccessLevel");
+
+            migrationBuilder.DropTable(
                 name: "tblAccessMatrix");
 
             migrationBuilder.DropTable(
@@ -132,6 +196,15 @@ namespace DBManager.Migrations
 
             migrationBuilder.DropTable(
                 name: "tblFieldAccessLevel");
+
+            migrationBuilder.DropTable(
+                name: "tblFields");
+
+            migrationBuilder.DropTable(
+                name: "tblQueryType");
+
+            migrationBuilder.DropTable(
+                name: "tblRole");
 
             migrationBuilder.DropTable(
                 name: "tblUser");
