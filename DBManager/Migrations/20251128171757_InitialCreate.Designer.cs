@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251125181033_InitialCreate")]
+    [Migration("20251128171757_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -181,6 +181,10 @@ namespace DBManager.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Order")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
