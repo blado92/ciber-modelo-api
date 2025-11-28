@@ -260,6 +260,32 @@ namespace DBManager.Migrations
                     b.ToTable("tblUser");
                 });
 
+            modelBuilder.Entity("DBManager.UserAudit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeceasedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblUserAudit");
+                });
+
             modelBuilder.Entity("DBManager.UserDeceasedRole", b =>
                 {
                     b.Property<int>("UserId")

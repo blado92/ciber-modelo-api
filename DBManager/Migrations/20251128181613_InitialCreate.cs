@@ -152,6 +152,22 @@ namespace DBManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tblUserAudit",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DeceasedId = table.Column<int>(type: "int", nullable: true),
+                    EventDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tblUserAudit", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tblUserDeceasedRole",
                 columns: table => new
                 {
@@ -209,6 +225,9 @@ namespace DBManager.Migrations
 
             migrationBuilder.DropTable(
                 name: "tblUser");
+
+            migrationBuilder.DropTable(
+                name: "tblUserAudit");
 
             migrationBuilder.DropTable(
                 name: "tblUserDeceasedRole");

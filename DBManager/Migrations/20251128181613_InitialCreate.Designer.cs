@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251128171757_InitialCreate")]
+    [Migration("20251128181613_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -261,6 +261,32 @@ namespace DBManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tblUser");
+                });
+
+            modelBuilder.Entity("DBManager.UserAudit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeceasedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tblUserAudit");
                 });
 
             modelBuilder.Entity("DBManager.UserDeceasedRole", b =>
