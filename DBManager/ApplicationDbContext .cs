@@ -52,5 +52,6 @@ namespace DBManager
         public DbSet<QueryType> QueryType { get; set; }
         public DbSet<FieldAccessLevel> FieldAccessLevel { get; set; }
         public DbSet<Fields> Fields { get; set; }
+        public DbSet<UserAudit> UserAudit { get; set; }
     }
 }
